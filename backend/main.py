@@ -9,10 +9,6 @@ from fastapi.responses import FileResponse
 
 app = FastAPI()
 
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
-import os
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 FRONTEND_DIR = os.path.join(BASE_DIR, "..", "frontend")
