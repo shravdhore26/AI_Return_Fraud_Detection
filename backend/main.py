@@ -9,11 +9,19 @@ from fastapi.responses import FileResponse
 
 app = FastAPI()
 
-app.mount("/static", StaticFiles(directory="../frontend"), name="static")
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+FRONTEND_DIR = os.path.join(BASE_DIR, "..", "frontend")
+
+app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
 
 @app.get("/")
 def home():
-    return FileResponse("../frontend/index.html")
+    return FileResponse(os.path.join(FRONTEND_DIR, "index.html"))
 
 app.add_middleware(
     CORSMiddleware,
